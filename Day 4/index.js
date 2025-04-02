@@ -13,8 +13,15 @@ app.get('/', (req, res)=>{
 })
 
 app.post('/addData', (req, res)=>{
+    req.body.id = students.length + 1
     students.push(req.body);
     res.redirect('/');
+})
+
+app.get('/deleteData', (req, res)=>{
+    let newData = students.filter((item)=>item.id != req.query.id)
+    students = newData
+    res.redirect('/')
 })
 
 app.listen(port, (error)=>{
