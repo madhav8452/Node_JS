@@ -24,6 +24,28 @@ app.get('/deleteData', (req, res)=>{
     res.redirect('/')
 })
 
+app.get('/editData/:id', (req, res)=>{
+    let singleData = students.find((item)=>item.id == req.params.id)
+    res.render('edit', {singleData})
+})
+
+app.post('/updateData', (req, res)=>{
+    students.map((item)=>{
+        if(item.id == req.body.id){
+            item.name = req.body.name,
+            item.email = req.body.email,
+            item.course = req.body.course,
+            item.city = req.body.city
+        }
+        else{
+            item
+        }
+    })
+    res.redirect('/')
+})
+
 app.listen(port, (error)=>{
     error ? console.log(error) : console.log(`Server Started on port : ${port}`)
 })
+
+
